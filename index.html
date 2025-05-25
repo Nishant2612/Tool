@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitalToolkit - All-in-One File Processing Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --secondary: #10B981;
+            --dark: #1E293B;
+            --light: #F8FAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--dark);
+        }
+
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #4F46E5 0%, #10B981 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .tool-categories {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .icon-large {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .featured-tools {
+            background: var(--light);
+            padding: 4rem 2rem;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 4rem 1rem;
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">DigitalToolkit</div>
+            <div class="nav-links">
+                <a href="#tools">Tools</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Your All-in-One File Processing Solution</h1>
+        <p>Convert, compress, edit, and transform files with ease</p>
+        <div style="margin-top: 2rem;">
+            <button style="background: white; color: var(--primary); padding: 0.75rem 2rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                Start Processing
+            </button>
+        </div>
+    </section>
+
+    <section class="tool-categories">
+        <h2 style="text-align: center; margin-bottom: 1rem;">Popular Categories</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <i class="fas fa-file-image icon-large"></i>
+                <h3>Image Tools</h3>
+                <p>Compress, convert, resize, and edit images</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-file-pdf icon-large"></i>
+                <h3>PDF Tools</h3>
+                <p>Merge, split, compress, and convert PDFs</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-video icon-large"></i>
+                <h3>Video Tools</h3>
+                <p>Convert, compress, and edit video files</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-tools">
+        <div class="tool-grid">
+            <div class="tool-card">
+                <i class="fas fa-compress" style="color: var(--primary); font-size: 1.5rem;"></i>
+                <div>
+                    <h4>Image Compressor</h4>
+                    <p>Reduce image size without quality loss</p>
+                </div>
+            </div>
+            <div class="tool-card">
+                <i class="fas fa-file-export" style="color: var(--secondary); font-size: 1.5rem;"></i>
+                <div>
+                    <h4>PDF Converter</h4>
+                    <p>Convert PDFs to Word, Excel, or images</p>
+                </div>
+            </div>
+            <div class="tool-card">
+                <i class="fas fa-crop" style="color: var(--primary); font-size: 1.5rem;"></i>
+                <div>
+                    <h4>Image Resizer</h4>
+                    <p>Resize images to any dimension</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4>DigitalToolkit</h4>
+                <p>Your complete file processing solution</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul style="list-style: none;">
+                    <li><a href="#tools" style="color: white; text-decoration: none;">All Tools</a></li>
+                    <li><a href="#privacy" style="color: white; text-decoration: none;">Privacy Policy</a></li>
+                    <li><a href="#terms" style="color: white; text-decoration: none;">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Connect With Us</h4>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-instagram"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
