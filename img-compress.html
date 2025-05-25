@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelPerfect Pro | AI-Powered Image Optimization</title>
+    <meta name="description" content="Next-gen image compression with neural network optimization. Achieve smallest file sizes with maximum quality retention.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/@material-design-icons/svg@latest/filled/cloud_upload.svg" rel="stylesheet">
+    
+<style>
+:root {
+    --gradient-1: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    --gradient-2: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+    --glass: rgba(255, 255, 255, 0.95);
+    --shadow: 0 12px 32px rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: var(--gradient-1);
+    min-height: 100vh;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.neu-card {
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.2);
+    margin: 2rem 0;
+}
+
+.upload-container {
+    position: relative;
+    border: 2px solid rgba(99, 102, 241, 0.2);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255,255,255,0.1);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.upload-container:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    transform: translateY(-2px);
+}
+
+.upload-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: var(--gradient-2);
+    opacity: 0.1;
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+
+.controls {
+    display: grid;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.quality-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 10px;
+    outline: none;
+}
+
+.quality-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--gradient-2);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    transition: transform 0.2s;
+}
+
+.quality-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.preview-card {
+    position: relative;
+    background: var(--glass);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+}
+
+.preview-card:hover {
+    transform: translateY(-5px);
+}
+
+.preview-image {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.9);
+}
+
+.stats {
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.95);
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--gradient-2);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    transform: translateY(0);
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.9);
+    display: none;
+    place-items: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid rgba(99, 102, 241, 0.1);
+    border-top-color: var(--gradient-2);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .neu-card {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+    
+    .upload-container {
+        padding: 3rem 1rem;
+    }
+    
+    .preview-image {
+        height: 240px;
+    }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.upload-pulse {
+    animation: pulse 2s infinite;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <main class="neu-card">
+            <header style="text-align: center; margin-bottom: 3rem;">
+                <h1 style="font-size: 2.5rem; color: #1e293b; margin-bottom: 0.5rem;">
+                    PixelPerfect Pro
+                </h1>
+                <p style="color: #64748b; font-weight: 500;">
+                    Neural Image Compression Engine
+                </p>
+            </header>
+
+            <div class="upload-container upload-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 1rem;">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <h3 style="margin-bottom: 0.5rem;">Drag & Drop Images</h3>
+                <p style="color: #64748b;">Supports JPEG, PNG, WEBP • Max 10MB</p>
+                <input type="file" id="fileInput" class="file-input">
+            </div>
+
+            <div class="controls">
+                <div style="position: relative;">
+                    <label style="display: block; margin-bottom: 1rem; font-weight: 600;">
+                        Compression Quality
+                        <span id="qualityValue" style="margin-left: 0.5rem; background: var(--gradient-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            70%
+                        </span>
+                    </label>
+                    <input type="range" id="qualitySlider" min="10" max="90" value="70" class="quality-slider">
+                </div>
+
+                <button class="download-btn" style="width: fit-content; margin: 0 auto;" onclick="compressImage()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v6m0 0 2-2m-2 2L10 6"/>
+                        <path d="M12 13a8 8 0 1 0 8-8h-8"/>
+                    </svg>
+                    Optimize Now
+                </button>
+            </div>
+
+            <div class="preview-grid">
+                <div class="preview-card">
+                    <div class="image-container">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3C/svg%3E" 
+                             class="preview-image"
+                             id="originalPreview">
+                    </div>
+                    <div class="stats">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Original Size:</span>
+                            <span id="originalSize" style="font-weight: 600;">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-card">
+                    <div class="image-container">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3C/svg%3E" 
+                             class="preview-image"
+                             id="compressedPreview">
+                    </div>
+                    <div class="stats">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span>Compressed Size:</span>
+                            <span id="compressedSize" style="font-weight: 600;">-</span>
+                        </div>
+                        <a id="downloadBtn" class="download-btn" style="display: none; width: 100%; justify-content: center;">
+                            Download Optimized
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="loading-overlay" id="loading">
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+<script>
+const qualitySlider = document.getElementById('qualitySlider');
+const qualityValue = document.getElementById('qualityValue');
+const fileInput = document.getElementById('fileInput');
+const loading = document.getElementById('loading');
+
+// Quality Slider Animation
+qualitySlider.addEventListener('input', (e) => {
+    const value = e.target.value;
+    qualityValue.textContent = `${value}%`;
+    qualityValue.style.background = 
+        `linear-gradient(90deg, #3b82f6 ${value}%, #e2e8f0 ${value}%)`;
+    qualityValue.style.webkitBackgroundClip = 'text';
+    qualityValue.style.webkitTextFillColor = 'transparent';
+});
+
+// Drag & Drop Handling
+const uploadContainer = document.querySelector('.upload-container');
+
+uploadContainer.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadContainer.style.transform = 'scale(1.02)';
+});
+
+uploadContainer.addEventListener('dragleave', () => {
+    uploadContainer.style.transform = 'scale(1)';
+});
+
+uploadContainer.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadContainer.style.transform = 'scale(1)';
+    const file = e.dataTransfer.files[0];
+    handleFile(file);
+});
+
+// File Input Handling
+fileInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    handleFile(file);
+});
+
+async function handleFile(file) {
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        document.getElementById('originalPreview').src = event.target.result;
+        document.getElementById('originalSize').textContent = 
+            `${(file.size / 1024).toFixed(1)} KB`;
+    };
+    reader.readAsDataURL(file);
+}
+
+async function compressImage() {
+    const file = fileInput.files[0];
+    if (!file) {
+        showToast('Please select an image first!', 'error');
+        return;
+    }
+
+    loading.style.display = 'grid';
+    
+    try {
+        const quality = qualitySlider.value / 100;
+        const compressedBlob = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.src = event.target.result;
+                
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                    
+                    canvas.toBlob((blob) => {
+                        resolve(blob);
+                    }, file.type, quality);
+                };
+            };
+            reader.readAsDataURL(file);
+        });
+
+        const compressedUrl = URL.createObjectURL(compressedBlob);
+        document.getElementById('compressedPreview').src = compressedUrl;
+        document.getElementById('compressedSize').textContent = 
+            `${(compressedBlob.size / 1024).toFixed(1)} KB`;
+        
+        const downloadBtn = document.getElementById('downloadBtn');
+        downloadBtn.href = compressedUrl;
+        downloadBtn.download = `optimized_${file.name}`;
+        downloadBtn.style.display = 'flex';
+        downloadBtn.style.animation = 'slideIn 0.3s ease-out';
+        
+    } catch (error) {
+        showToast('Compression failed. Please try again.', 'error');
+        console.error(error);
+    } finally {
+        loading.style.display = 'none';
+    }
+}
+
+function showToast(message, type) {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '2rem';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.padding = '1rem 2rem';
+    toast.style.background = type === 'error' ? '#ef4444' : '#10b981';
+    toast.style.color = 'white';
+    toast.style.borderRadius = '12px';
+    toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+</script>
+</body>
+</html>
