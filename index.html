@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileMagic - Ultimate Image & PDF Toolkit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 12rem 2rem 8rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        /* Tool Categories */
+        .categories {
+            max-width: 1200px;
+            margin: -4rem auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        .category-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* Featured Tools */
+        .featured-tools {
+            background: var(--light);
+            padding: 6rem 2rem;
+        }
+
+        .tool-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .tool-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .tool-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .try-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 1.5rem;
+        }
+
+        .try-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 8rem 1rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo">FileMagic</a>
+            <div class="nav-links">
+                <a href="#tools">All Tools</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Transform Your Files with<br>AI-Powered Precision</h1>
+        <p>Instant processing for images, PDFs, and documents</p>
+        <a href="#tools" class="try-button" style="margin-top: 2rem;">
+            Explore Tools <i class="fas fa-arrow-right"></i>
+        </a>
+    </section>
+
+    <section class="categories">
+        <div class="category-grid">
+            <a href="/image-tools" class="tool-link">
+                <div class="category-card">
+                    <i class="fas fa-file-image category-icon"></i>
+                    <h3>Image Tools</h3>
+                    <p>Compress, convert, edit, and enhance images</p>
+                </div>
+            </a>
+            
+            <a href="/pdf-tools" class="tool-link">
+                <div class="category-card">
+                    <i class="fas fa-file-pdf category-icon"></i>
+                    <h3>PDF Tools</h3>
+                    <p>Merge, split, convert, and secure PDFs</p>
+                </div>
+            </a>
+
+            <a href="/document-tools" class="tool-link">
+                <div class="category-card">
+                    <i class="fas fa-file-alt category-icon"></i>
+                    <h3>Document Tools</h3>
+                    <p>Convert, format, and optimize documents</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="featured-tools">
+        <div class="tool-grid">
+            <div class="tool-card">
+                <i class="fas fa-compress tool-icon"></i>
+                <h4>Smart Image Compressor</h4>
+                <p>Reduce file size without quality loss</p>
+                <a href="/image-compressor" class="try-button">Try Now</a>
+            </div>
+
+            <div class="tool-card">
+                <i class="fas fa-file-export tool-icon"></i>
+                <h4>PDF to Word Converter</h4>
+                <p>Perfect document formatting conversion</p>
+                <a href="/pdf-to-word" class="try-button">Try Now</a>
+            </div>
+
+            <div class="tool-card">
+                <i class="fas fa-crop tool-icon"></i>
+                <h4>Batch Image Resizer</h4>
+                <p>Resize multiple images simultaneously</p>
+                <a href="/image-resizer" class="try-button">Try Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add more sections as needed -->
+</body>
+</html>
